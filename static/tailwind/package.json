@@ -1,0 +1,23 @@
+{
+  "name": "money_management",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Harshvardhan1809/Money-Management-App.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Harshvardhan1809/Money-Management-App/issues"
+  },
+  "homepage": "https://github.com/Harshvardhan1809/Money-Management-App#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.2.1"
+  }
+}
