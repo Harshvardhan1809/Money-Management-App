@@ -1,0 +1,115 @@
+<mxfile host="65bd71144e">
+    <diagram id="ncoRFozhDAJn9ymLV5I0" name="Page-1">
+        <mxGraphModel dx="947" dy="444" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="5" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="2" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="720" y="70" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="8" style="edgeStyle=none;html=1;" parent="1" source="2" target="9" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="360" y="160" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="10" style="edgeStyle=none;html=1;" parent="1" source="2" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="200" y="70" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="2" value="&lt;u&gt;Dashboard&lt;br&gt;&lt;/u&gt;1) Expenditure pichart&lt;br&gt;2) Total amount spent&lt;br&gt;3) Form to add expenditure&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="280" y="20" width="160" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="" style="endArrow=classic;html=1;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="520" y="70" as="sourcePoint"/>
+                        <mxPoint x="520" y="160" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="7" value="&lt;u&gt;Account&lt;/u&gt;&lt;br&gt;1)Username, password&lt;br&gt;2) Email authentication&lt;br&gt;3)Login/logout&lt;br&gt;4)Profile Settings&lt;br&gt;5)Delete Account" style="rounded=1;whiteSpace=wrap;html=1;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="460" y="160" width="140" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="&lt;u&gt;Monthly expenditure&lt;/u&gt;&lt;br&gt;1)Pi-chart for each month&amp;nbsp;&lt;br&gt;2)Breakdown of amount in main categories" style="rounded=1;whiteSpace=wrap;html=1;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="300" y="160" width="120" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="" style="endArrow=classic;html=1;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="200" y="70" as="sourcePoint"/>
+                        <mxPoint x="200" y="160" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="12" value="&lt;u&gt;Breakdown&lt;/u&gt;&lt;br&gt;1) Daily spending&amp;nbsp;&lt;br&gt;2) Breakdown of spending with amount" style="rounded=1;whiteSpace=wrap;html=1;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="140" y="160" width="120" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="&lt;font style=&quot;font-size: 15px&quot;&gt;Website Structure&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="60" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="&lt;font style=&quot;font-size: 15px&quot;&gt;Model Structure&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="20" y="320" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" style="edgeStyle=none;html=1;fontSize=15;" parent="1" source="16" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="520" y="390" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="20" style="edgeStyle=none;html=1;fontSize=12;" parent="1" source="16" target="21" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="360" y="480" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="24" style="edgeStyle=none;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;fontSize=12;" parent="1" source="16" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="200" y="390" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="16" value="User" style="rounded=1;whiteSpace=wrap;html=1;fontSize=15;" parent="1" vertex="1">
+                    <mxGeometry x="300" y="360" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="" style="endArrow=classic;html=1;fontSize=15;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="520" y="390" as="sourcePoint"/>
+                        <mxPoint x="520" y="480" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="19" value="&lt;span style=&quot;font-size: 12px&quot;&gt;&lt;u&gt;Account&lt;/u&gt;&lt;br&gt;-&amp;gt; Username, password&lt;br&gt;-&amp;gt; Profile Pic&lt;br&gt;-&amp;gt; Email authentication&lt;br&gt;-&amp;gt; Expendtiure&lt;br&gt;-&amp;gt; Spending&lt;br&gt;-&amp;gt; Location eg.Tokyo Japan&lt;br&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=15;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="461" y="480" width="120" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="&lt;u style=&quot;color: rgb(240 , 240 , 240) ; font-family: &amp;#34;helvetica&amp;#34; ; font-size: 12px ; font-style: normal ; font-weight: 400 ; letter-spacing: normal ; text-indent: 0px ; text-transform: none ; word-spacing: 0px ; background-color: rgb(42 , 42 , 42)&quot;&gt;Spending&lt;/u&gt;&lt;br style=&quot;color: rgb(240 , 240 , 240) ; font-family: &amp;#34;helvetica&amp;#34; ; font-size: 12px ; font-style: normal ; font-weight: 400 ; letter-spacing: normal ; text-indent: 0px ; text-transform: none ; word-spacing: 0px ; background-color: rgb(42 , 42 , 42)&quot;&gt;&lt;span style=&quot;color: rgb(240 , 240 , 240) ; font-family: &amp;#34;helvetica&amp;#34; ; font-size: 12px ; font-style: normal ; font-weight: 400 ; letter-spacing: normal ; text-indent: 0px ; text-transform: none ; word-spacing: 0px ; background-color: rgb(42 , 42 , 42) ; display: inline ; float: none&quot;&gt;-&amp;gt; Date&lt;/span&gt;&lt;br style=&quot;color: rgb(240 , 240 , 240) ; font-family: &amp;#34;helvetica&amp;#34; ; font-size: 12px ; font-style: normal ; font-weight: 400 ; letter-spacing: normal ; text-indent: 0px ; text-transform: none ; word-spacing: 0px ; background-color: rgb(42 , 42 , 42)&quot;&gt;&lt;span style=&quot;color: rgb(240 , 240 , 240) ; font-family: &amp;#34;helvetica&amp;#34; ; font-size: 12px ; font-style: normal ; font-weight: 400 ; letter-spacing: normal ; text-indent: 0px ; text-transform: none ; word-spacing: 0px ; background-color: rgb(42 , 42 , 42) ; display: inline ; float: none&quot;&gt;-&amp;gt; Amount&lt;/span&gt;&lt;br style=&quot;color: rgb(240 , 240 , 240) ; font-family: &amp;#34;helvetica&amp;#34; ; font-size: 12px ; font-style: normal ; font-weight: 400 ; letter-spacing: normal ; text-indent: 0px ; text-transform: none ; word-spacing: 0px ; background-color: rgb(42 , 42 , 42)&quot;&gt;&lt;span style=&quot;color: rgb(240 , 240 , 240) ; font-family: &amp;#34;helvetica&amp;#34; ; font-size: 12px ; font-style: normal ; font-weight: 400 ; letter-spacing: normal ; text-indent: 0px ; text-transform: none ; word-spacing: 0px ; background-color: rgb(42 , 42 , 42) ; display: inline ; float: none&quot;&gt;-&amp;gt; Note&lt;/span&gt;&lt;br style=&quot;color: rgb(240 , 240 , 240) ; font-family: &amp;#34;helvetica&amp;#34; ; font-size: 12px ; font-style: normal ; font-weight: 400 ; letter-spacing: normal ; text-indent: 0px ; text-transform: none ; word-spacing: 0px ; background-color: rgb(42 , 42 , 42)&quot;&gt;&lt;span style=&quot;color: rgb(240 , 240 , 240) ; font-family: &amp;#34;helvetica&amp;#34; ; font-size: 12px ; font-style: normal ; font-weight: 400 ; letter-spacing: normal ; text-indent: 0px ; text-transform: none ; word-spacing: 0px ; background-color: rgb(42 , 42 , 42) ; display: inline ; float: none&quot;&gt;-&amp;gt; Type&lt;br&gt;-&amp;gt; Account&lt;br&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="300" y="480" width="120" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="&lt;u style=&quot;font-family: &amp;#34;helvetica&amp;#34;&quot;&gt;Expenditure&lt;/u&gt;&lt;br style=&quot;font-family: &amp;#34;helvetica&amp;#34;&quot;&gt;&lt;span style=&quot;font-family: &amp;#34;helvetica&amp;#34;&quot;&gt;-&amp;gt; Spending&lt;/span&gt;&lt;br style=&quot;font-family: &amp;#34;helvetica&amp;#34;&quot;&gt;&lt;span style=&quot;font-family: &amp;#34;helvetica&amp;#34;&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;#34;helvetica&amp;#34;&quot;&gt;&amp;nbsp;Account&lt;/span&gt;&lt;span style=&quot;font-family: &amp;#34;helvetica&amp;#34;&quot;&gt;&lt;br&gt;-&amp;gt; User&lt;br&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="140" y="480" width="120" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="" style="endArrow=classic;html=1;fontSize=12;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" target="23" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="200" y="390" as="sourcePoint"/>
+                        <mxPoint x="390" y="520" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="26" value="" style="endArrow=classic;html=1;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="720" y="70" as="sourcePoint"/>
+                        <mxPoint x="720" y="160" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="27" value="&lt;u&gt;Login Page&lt;/u&gt;&lt;br&gt;1)Sign Up -&amp;gt; Form&lt;br&gt;2) Login&amp;nbsp;&lt;br&gt;3) Terms and Conditions&lt;br&gt;3) Forgot password" style="rounded=1;whiteSpace=wrap;html=1;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="650" y="160" width="140" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="28" value="&lt;font style=&quot;font-size: 15px&quot;&gt;Apps in the Project&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="30" y="720" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="29" value="Accounts&lt;br&gt;&lt;span style=&quot;font-size: 12px&quot;&gt;-&amp;gt; View Account&lt;br&gt;-&amp;gt;Change profile&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=15;" vertex="1" parent="1">
+                    <mxGeometry x="80" y="840" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="32" value="Dashboard App&lt;br&gt;&lt;span style=&quot;font-size: 12px&quot;&gt;-&amp;gt;Main Home Page&lt;br&gt;-&amp;gt;Separate Form Page&lt;br&gt;-&amp;gt; Current Month&lt;br&gt;-&amp;gt; Overall breakdown&amp;nbsp;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=15;" vertex="1" parent="1">
+                    <mxGeometry x="400" y="840" width="120" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="33" value="Settings&lt;br&gt;&lt;span style=&quot;font-size: 12px&quot;&gt;-&amp;gt; Delete Account&lt;br&gt;-&amp;gt; Dark/Light Mode&lt;br&gt;-&amp;gt;Terms and conditions&lt;br&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=15;" vertex="1" parent="1">
+                    <mxGeometry x="240" y="840" width="120" height="120" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
