@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../../static/css/account.css">
+    <title>Money Management</title>
+</head>
+<body class="fixed">
+    <div class="top-0 w-screen inset-0" id="unscrollable-wrapper">
+        <nav class="z-50 nav bg-white">
+            <div class="flex items-center justify-between pr-2">
+                <div>
+                    <a href="./dashboard-hero.html" class="ml-8">Money Management</a>
+                    <a href="#" class="ml-8" id="sidebar-button">
+                        <i class="fa fa-thin fa-bars fa"></i>
+                    </a>
+                </div>
+                <div class="flex">
+                    <div class="flex flex-row space-x-8">
+                        <form action="">
+                            <div class="px-3 -mt-1 rounded-full shadow-sm bg-slate-200">
+                                <input type="text" placeholder="Search.." class="focus:outline-none m-1 placeholder:text-slate-400 bg-slate-200">
+                                <button type="Submit">
+                                    <i class="fa fa-thin fa-magnifying-glass"></i>
+                                </button>
+                            </div>
+                        </form>
+                        <a href="./account.html">
+                            <i class="fa fa-thin fa-user fa-xl"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fa fa-thin fa-gift fa-xl"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fa fa-thin fa-bell fa-xl"></i>
+                        </a>
+                        <a href="./settings.html">
+                            <i class="fa fa-thin fa-gear fa-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="section-wrapper">
+        <section id="container" class="container flex h-screen font-mulish">
+
+            <aside id="sidebar" class="flex-shrink-0 flex flex-row bg-slate-200 border border-r-300 overflow-x:hidden h-full overflow-y:hidden">
+                <div class="items-center mt-28 mx-auto">
+                    <div class="flex flex-col space-y-6 py-2 px-10">
+                        <a href="./dashboard-hero.html">Dashboard</a>
+                        <a href="./monthly-expenditure.html">Monthly Expenditure</a>
+                        <a href="./this-month.html">This Month</a>
+                        <a href="./account.html">Account</a>
+                        <a href="./settings.html">Settings</a>
+                    </div>
+                    <div class="flex flex-col mt-14 mx-2">
+                        <div class="bg-black text-white px-4 py-3 rounded-lg">
+                            <div class="text-base">
+                                <p>Get the PRO version for <br> more features!</p>
+                            </div>
+                            <div class="mt-3 text-sm">
+                                <p>Link credit cards and bank<br> accounts, get monthly<br> 
+                                    estimations and many<br> more features!</p>
+                            </div>
+                            <div class="mt-3 text-base bg-white rounded-full text-center p-1 text-black">
+                                <button>Get Started!</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <aside id="sidebar-minimize" class="flex-shrink-0 flex flex-row bg-slate-200 border border-r-300 overflow-x:hidden hidden">
+                <div class="items-center mt-28 mx-auto">
+                    <div class="flex flex-col space-y-8 py-2 px-5">
+                        <a href="./dashboard-hero.html">
+                            <i class="fa fa-thin fa-chart-line fa-xl"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fa fa-thin fa-calendar-week fa-xl"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fa fa-thin fa-calendar fa-xl"></i>
+                        </a>
+                        <a href="./account.html">
+                            <i class="fa fa-thin fa-user fa-xl"></i>
+                        </a>
+                        <a href="./settings.html">
+                            <i class="fa fa-thin fa-gear fa-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+
+
+                <div id="hero" class="px-12 pt-1 pb-4 bg-slate-100 h-screen overflow-scroll w-screen">
+
+                    <div class="flex justify-between w-full items-center">
+                        <div class>
+                            <p class="p-4 text-xl">Account</p>
+                        </div>
+                    </div>
+
+                    <section class="container">
+                        <div class="flex flex-row">
+                            <div class="w-4/12 p-4">
+                                <div id = "account-card" class="p-4 pb-6 bg-white rounded-[10px] bg-white">
+                                    <div id="profile-card" class="flex flex-col justify-center items-center">
+                                        <div class="w-full">
+                                            <img src="../../static/img/profile_picture.jpg" class="mx-auto rounded-full border border-solid" width="175" height="175" alt="">
+                                        </div>
+                                        <div class="flex w-full items-end justify-center pb-4 border border-t-0 border-l-0 border-r-0 border-b-2">
+                                            <span class="text-sm text-slate-500 mt-[1.25] mr-2">Change profile picture</span>
+                                            <button class="">
+                                                <i class="fa-solid fa-pen"></i> 
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <p class="mt-4 text-2xl">Harshvardhan Kedare</p>
+                                        </div>
+                                    </div>    
+                                    <div id="accounts-panel" class="mt-2 mb-2 pt-4 border border-t-2 border-l-0 border-r-0 border-b-0">
+                                        <div class="pt-1 pb-2 pl-8 text-lg border border-t-0 border-l-0 border-r-0 border-b-2">
+                                            <a href="#" id="account-button">Account</a>
+                                        </div>
+                                        <div class="pt-2 pb-2 pl-8 text-lg border border-t-0 border-l-0 border-r-0 border-b-2">
+                                            <a href="#" id="password-button">Password</a>
+                                        </div>
+                                        <div class="pt-2 pb-2 pl-8 text-lg border border-t-0 border-l-0 border-r-0 border-b-2">
+                                            <a href="#" id="permissions-button">Permissions</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-8/12 p-4">
+                                <div id="account-header" class="bg-white py-8 pr-4 pl-8 mb-2 rounded-[10px]">
+                                    <p class="text-2xl">Account</p>
+                                    <p class="text-gray-400 text-base">* Change your personal information</p>
+                                    <div id="account-body" class="mt-4">
+                                        <form action="">
+                                            <div class="flex flex-row">
+                                                <div class="w-1/2">
+                                                    <label for="first-name" class="">First Name</label>
+                                                    <input type="text" class="mt-2 block bg-gray-200 px-4 py-2 w-[275px] rounded-md" value="Harshvardhan">
+                                                </div>
+                                                <div class="w-1/2">
+                                                    <label for="last-name" class="">Last Name</label>
+                                                    <input type="text" class="mt-2 block bg-gray-200 px-4 py-2 w-[275px] rounded-md" value="Kedare">
+                                                </div>
+                                            </div>
+                                            <div class="flex flex-row mt-6">
+                                                <div class="w-1/2">
+                                                    <label for="date" class="">Date Joined</label>
+                                                    <input type="date" class="mt-2 block bg-gray-200 px-4 py-2 w-[275px] rounded-md" value="Harshvardhan">
+                                                </div>
+                                                <div class="w-1/2">
+                                                    <label for="location" class="">Location</label>
+                                                    <select id="location" class="mt-3 block bg-gray-200 px-4 py-2 w-[275px] rounded-md bg-gray-200">
+                                                        <option selected>Location</option>
+                                                        <option value="US">Tokyo</option>
+                                                        <option value="DE">Chiba</option>
+                                                        <option value="CA">Osaka</option>
+                                                        <option value="FR">Kyoto</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="mt-6">
+                                                <div class="w-1/2">
+                                                    <label for="date" class="">Phone Number</label>
+                                                    <input type="tel" class="mt-2 block bg-gray-200 px-4 py-2 w-[275px] rounded-md" value="070-XXXX-3594">
+                                                </div> 
+                                            </div>
+                                            <div class="mt-6">
+                                                <div class="w-1/2">
+                                                    <label for="date" class="">Payment Method</label>
+                                                    <div class="flex mt-2 block bg-gray-200 px-4 py-2 w-[275px] rounded-md">
+                                                        <img src="../../static/img/mastercard.png" alt="no_img" width="30px" height="20px" class="mr-4">
+                                                        <input type="tel" class=" bg-gray-200 " placeholder="1234 XXXX XXXX 5678">
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                            <div class="mt-6">
+                                                <div class="w-9/12">
+                                                    <label for="date" class="text-red-600">Delete Account</label>
+                                                    <span class="mt-2 block text-gray-500 text-sm">By deleting your account, you will lose all your personal information and won't be able to use our services!</span>
+                                                    <input type="checkbox" id="delete-check" class="mt-2 mr-2" name="delete-check">
+                                                    <label for="delete-check" class="mt-2">I wish to delete my account</label><br>
+                                                    <label for="delete-password" class="mt-4 text-gray-500">Enter your password for confirmation</label>
+                                                    <input type="password" class="mt-2 block bg-gray-200 px-4 py-2 w-[275px] rounded-md" value="" placeholder="Enter password">
+                                                </div> 
+                                            </div>
+                                        </form>
+                                        <button type="submit" class="block bg-black text-md text-white rounded-md px-5 py-2 mt-5">Submit</button>
+                                    </div>
+                                </div>
+                                
+                                <div id="password-header" class="hidden bg-white py-8 pr-4 pl-8 mb-2 rounded-[10px]">
+                                    <p class="text-2xl">Password</p>
+                                    <p class="text-gray-400 text-base">* Change your password</p>
+                                    <div id="password-body" class="mt-4">
+                                        <form action="">
+                                            <div class="flex flex-col">
+                                                <div class="mb-4">
+                                                    <label for="old-password" class="">Old Password</label>
+                                                    <input type="password" class="mt-2 block bg-gray-200 px-4 py-2 w-[300px] rounded-md">
+                                                </div>
+                                                <div class="mb-4">
+                                                    <label for="new-password" class="">New Password</label>
+                                                    <input type="password" class="mt-2 block bg-gray-200 px-4 py-2 w-[300px] rounded-md">
+                                                </div>
+                                                <div class="mb-4">
+                                                    <label for="confirm-new-password" class="">Confirm new password</label>
+                                                    <input type="password" class="mt-2 block bg-gray-200 px-4 py-2 w-[300px] rounded-md">
+                                                </div>
+                                            </div>
+                                            <div class="mt-4">
+                                                <div class="w-9/12">
+                                                    <label for="date" class="text-red-600">Change my password</label>
+                                                    <span class="mt-2 block text-gray-500 text-sm">Make sure it's at least 15 characters OR at least 8 characters including a number and a lowercase letter!</span>
+                                                    <input type="checkbox" id="passwrod-change-check" class="mt-2 mr-2" name="password-change-check">
+                                                    <label for="password-change-check" class="mt-2">I wish to change my password</label><br>
+                                                </div> 
+                                            </div>
+                                        </form>
+                                        <button type="submit" class="block bg-black text-md text-white rounded-md px-5 py-2 mt-5 mb-2">Submit</button>
+                                        <a href="#" class="">Forgot the password?</a>
+                                    </div>
+                                </div>
+
+                                <div id="permissions-header" class="hidden bg-white py-8 pr-4 pl-8 mb-2 rounded-[10px]">
+                                    <p class="text-2xl">Permissions</p>
+                                    <p class="text-gray-400 text-base">* Manage your permissions</p>
+                                    <div id="password-body" class="mt-4">
+                                        <form action="">
+                                            <div class="flex flex-col">
+                                                <div class="mb-3 w-10/12">
+                                                    <input type="checkbox" id="password-change-check" class="mt-2 mr-2" name="password-change-check">    
+                                                    <label for="old-password" class="">Allow emails regarding our services</label>
+                                                    <p class="pb-4 text-gray-500 text-sm">We periodically send emails to our users regarding upgrades, new features and services and offers on PRO version</p>
+                                                </div>
+                                                <div class="mb-3 w-10/12">
+                                                    <input type="checkbox" id="password-change-check" class="mt-2 mr-2" name="password-change-check">    
+                                                    <label for="old-password" class="">Allow cookies</label>
+                                                    <p class="pb-4 text-gray-500 text-sm">We use cookies for Javascript functionality. Accept cookies to enhance user-experience</p>
+                                                </div>
+                                                <div class="mb-3 w-10/12">
+                                                    <input type="checkbox" id="password-change-check" class="mt-2 mr-2" name="password-change-check">    
+                                                    <label for="old-password" class="">Allow notifications</label>
+                                                    <p class="pb-4 text-gray-500 text-sm">We might send notifications to your account if you receive a badge, if you are inactive for many days etc.</p>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <button type="submit" class="block bg-black text-md text-white rounded-md px-5 py-2 mt-2 mb-2">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-5 mb-5 p-2 border border-transparent border-t-slate-300">
+                            <footer class="flex mb-10 justify-between text-slate-500">
+                                <div class="flex flex-row items-center">
+                                        <p class="p-2 text-md">&copy; Harshvardhan Kedare 2022</p>
+                                </div>
+                                <div class="flex flex-row items-center">
+                                    <a href="https://github.com/Harshvardhan1809" target="_blank" class="p-2 text-md">About Me</a>
+                                </div>
+                            </footer>
+                        </div>
+                    </section>
+
+                </div>   
+        </section>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="../../static/js/dashboard-sidebar.js"></script>
+    <script src="../../static/js/account.js"></script>
+</body>
+</html> 
+
+<!-- 
+flex w-full items-center justify-center
+-->
