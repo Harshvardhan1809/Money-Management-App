@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.core.mail import send_mail
 from django.utils.translation import gettext_lazy as _
 from datetime import date
+from django.db.models import signals
 
 # Create your models here.
 # all the models will be here 
@@ -126,7 +127,7 @@ class Account(models.Model):
     first_name = models.CharField(_("first name"), max_length=30, blank=True)
     last_name = models.CharField(_("last name"), max_length=150, blank=True)
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
-    profile_pic = models.ImageField(blank=False, null= False, default='profile/default/default.jpg', upload_to='profile/account/')
+    profile_pic = models.ImageField(blank=True, null= True, default='profile/default/default.jpg', upload_to='profile/account/')
     location = models.CharField(verbose_name='location',max_length=150, null=False, blank=False, default=None, choices = TODOUFUKEN)
 
     def get_full_name(self):
@@ -139,6 +140,15 @@ class Account(models.Model):
         """Return the short name for the user."""
         return self.first_name
 
+
+# Signals and their functions
+
+def create_expenditure(sender, created, instance, **kwargs):
+    if(instance.pk and created): 
+        expenditure = Expenditure.objects.create(account = instance)
+        expenditure.save()
+        
+signals.post_save.connect(create_expenditure, sender=Account)
 
 #set up location field temporarily for now. might improve later
 

@@ -14,17 +14,48 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include 
+from django.urls import path, re_path, include 
 import accounts.views as accounts 
+import frontend.views as frontend 
 from django.conf.urls.static import static
 from money_management.settings import MEDIA_URL, MEDIA_ROOT
+from money_management.settings import STATIC_URL
+from rest_framework import routers; 
+from knox import views as knox_views
+from accounts.api import UserViewSet, AccountViewSet, ExpenditureViewSet, SpendingViewSet, RegisterAPI, LoginAPI, UserAPI
+
+# API endpoints 
+router = routers.DefaultRouter()
+router.register('api/user', UserViewSet, 'accounts')
+router.register('api/account', AccountViewSet, 'accounts')
+router.register('api/expenditure', ExpenditureViewSet, 'expenditure')
+router.register('api/spending', SpendingViewSet, 'spending')
+
+auth_url_patterns = [
+    path('api/auth', include('knox.urls')), 
+    path('api/auth/register', RegisterAPI.as_view()), 
+    path('api/auth/login', LoginAPI.as_view()),
+    path('api/auth/user', UserAPI.as_view()), 
+    path('api/auth/logout', knox_views.LogoutView.as_view(), name="knox_logout")
+
+]
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include("accounts.urls")), 
-    path('', include("dashboard.urls")), 
-    path('settings/', include("settings.urls")), 
+    #path('accounts/', include("accounts.urls")), 
+   
+    #path('', include("dashboard.urls")), 
+    #path('settings/', include("settings.urls")), 
 ]
 
 urlpatterns += static(MEDIA_URL,document_root=MEDIA_ROOT)
+urlpatterns += static(STATIC_URL)
+
+urlpatterns +=  re_path('[\s\S]*', include("frontend.urls")),  # use regex to match any pattern. Routing to the appropriate page will be done by React
+
+#Include the API endpoints 
+urlpatterns += router.urls 
+urlpatterns += auth_url_patterns
+
 #urlpatterns += static('media/profile/default')

@@ -1,0 +1,1 @@
+export const GET_SPENDINGS = "GET_SPENDINGS"; 
