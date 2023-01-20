@@ -1,7 +1,9 @@
-from django.urls import path
+from django.urls import path, include
 from .views import *
 from django.conf.urls.static import static
 from money_management.settings import MEDIA_URL, MEDIA_ROOT
+from rest_framework import routers; 
+from accounts.api import AccountViewSet, ExpenditureViewSet, SpendingViewSet, RegisterAPI
 
 app_name = "accounts"
 
