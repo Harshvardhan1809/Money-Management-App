@@ -23,6 +23,7 @@ from money_management.settings import STATIC_URL
 from rest_framework import routers; 
 from knox import views as knox_views
 from accounts.api import UserViewSet, AccountViewSet, ExpenditureViewSet, SpendingViewSet, RegisterAPI, LoginAPI, UserAPI
+import re
 
 # API endpoints 
 router = routers.DefaultRouter()
@@ -52,10 +53,21 @@ urlpatterns = [
 urlpatterns += static(MEDIA_URL,document_root=MEDIA_ROOT)
 urlpatterns += static(STATIC_URL)
 
-urlpatterns +=  re_path('[\s\S]*', include("frontend.urls")),  # use regex to match any pattern. Routing to the appropriate page will be done by React
-
+# Result close just cant detect api/(paths)
+urlpatterns +=  re_path(r'(?![^(api)[/a-zA-Z0-9]])', include("frontend.urls")), 
+ 
 #Include the API endpoints 
 urlpatterns += router.urls 
 urlpatterns += auth_url_patterns
 
 #urlpatterns += static('media/profile/default')
+
+# Regex testing 
+# pattern = r
+# e.compile(r'(?![^(api)])')
+# sentence = 'http://127.0.0.1:8000/api/expenditure/'
+# urlpatterns +=  re_path(r'^(?!(api)$)(?:[\s\S])', include("frontend.urls")), 
+# matches = pattern.finditer(sentence)
+# print("Does match?")
+# for match in matches: 
+#     print(match)

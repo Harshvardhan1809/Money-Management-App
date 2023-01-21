@@ -1,6 +1,9 @@
 import React, {Component, Fragment} from 'react'; 
 import ReactDOM from 'react-dom'; 
 import {HashRouter as Router, Route, Routes, Redirect} from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
+// import { fab } from '@fortawesome/free-brands-svg-icons'
 
 import Dashboard from './layout/Dashboard';
 // import Login from './auth/Login'
@@ -10,6 +13,11 @@ import PrivateRoute from './auth/PrivateRoute'
 
 import {Provider} from 'react-redux' // connects the redux stuff to React app
 import store from '../store'
+
+// Explicitly import and add the specific icons you will use throughout the App
+import { faUtensils, faBoxTissue, faFilm, faTrain, faShirt, faUsers, faKitMedical, faBookOpen, faMoneyBill1Wave, faQuestion } from '@fortawesome/free-solid-svg-icons'
+// FontAwesome library
+library.add(faUtensils, faBoxTissue, faFilm, faTrain, faShirt, faUsers, faKitMedical, faBookOpen, faMoneyBill1Wave, faQuestion) 
 
 class App extends Component {
     render(){
