@@ -4,9 +4,10 @@ import React, {Fragment, Component} from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { getSpendings } from '../../actions/data'
+import { getRecentAdditions } from '../../actions/data'
 
 import { spending_choices } from '../../../static/utilities/spending_choices'
+import { eng_spending_choices } from '../../../static/utilities/eng_spending_choices'
 import { spending_icon_class } from '../../../static/utilities/spending_icon'
 
 // FontAwesome icons 
@@ -16,12 +17,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export class RecentAdditions extends Component {
 
+    // Checks the types of properties passed to components and warns if there is a mismatch 
     static propTypes = {
-        spendings: PropTypes.array.isRequired
+        recent_spendings: PropTypes.array.isRequired
     }
 
     componentDidMount(){
-        this.props.getSpendings(); 
+        this.props.getRecentAdditions(); 
     }
 
     render(){
@@ -42,11 +44,11 @@ export class RecentAdditions extends Component {
                     </div>
                 </div>
                 
-                { this.props.spendings.map(spending =>(
+                { this.props.recent_spendings.map(spending =>(
                     <div className="flex justify-between p-2">
                         <div className="flex space-x-2 w-1/4">
                             <p className="text-sm"><FontAwesomeIcon icon={`${spending_icon_class[spending.type1]}`} size="xl" /></p>
-                            <p>{spending_choices[spending.type1]}</p>
+                            <p>{eng_spending_choices[spending.type1]}</p>
                         </div>
                         <div className="flex w-3/4">
                             <div className="flex w-1/4 justify-between"><p>&yen;{spending.amount}</p></div>
@@ -65,9 +67,9 @@ export class RecentAdditions extends Component {
 
 // get state and call getLeads
 const mapStateToProps = state => ({
-    spendings: state.data.spendings
+    recent_spendings: state.data.recent_spendings
 })
 
-export default connect(mapStateToProps, {getSpendings} )(RecentAdditions); 
+export default connect(mapStateToProps, {getRecentAdditions} )(RecentAdditions); 
 
 
