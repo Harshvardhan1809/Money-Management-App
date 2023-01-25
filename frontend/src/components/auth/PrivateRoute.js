@@ -12,7 +12,10 @@ const PrivateRoute = () => {
     console.log("Printing the" , globalStore, "store"); 
 
     if (globalStore.auth.isLoading) return <h2>Loading...</h2>
-    else if(!globalStore.auth.isAuthenticated) return <Navigate to="/login" />
+    else if(!globalStore.auth.isAuthenticated) {
+
+        return <Navigate to="/login" />
+    }
     else {
         console.log("daf")
         return <Outlet/>

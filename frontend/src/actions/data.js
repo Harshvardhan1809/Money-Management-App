@@ -8,18 +8,18 @@ import {default as dt} from "py-datetime";
 // GET_RECENT_ADDITIONS
 export const getRecentAdditions = () => dispatch => {
 
-    const config = {
-        headers: {
-            'Content-type': 'application/json'
-        }
-    }
-    const token = getState().auth.token; 
-    if(token){
-        config.headers['Authorization'] = `Token ${token}`; 
-    }
+    // const config = {
+    //     headers: {
+    //         'Content-type': 'application/json'
+    //     }
+    // }
+    // const token = getState().auth.token; 
+    // if(token){
+    //     config.headers['Authorization'] = `Token ${token}`; 
+    // }
 
     // set params to get only 10 data
-    axios.get('api/spending/', config, {
+    axios.get('api/spending/', {
         params: {
             _limit: 10, 
         }
@@ -46,7 +46,7 @@ export const getRecentAdditions = () => dispatch => {
 export const getCarouselData = () => dispatch => {
 
     // set params to get only 10 data
-    axios.get('api/spending/', config, {
+    axios.get('api/spending/', {
         params: {
             date: 10, 
             expenditure, 

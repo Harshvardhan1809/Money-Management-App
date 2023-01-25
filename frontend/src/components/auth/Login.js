@@ -3,6 +3,7 @@ import {Route, Routes, Navigate, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import { login } from '../../actions/auth'
+import store from '../../store'
 // proptypes essentially typechecks the attributes of the things passed to props
 
 export class Login extends Component {
@@ -36,9 +37,13 @@ export class Login extends Component {
     
     render() {
 
-        if(this.props.isAuthenticated){
+        if(this.props.isAuthenticated | store.getState.auth?.isAuthenticated){
             console.log("navigate"); 
             return <Navigate to="/front" />; 
+        }
+        else{
+            console.log("Printing this.state", this.state)
+            console.log("Printing props", this.props)
         }
 
         const { email, password } = this.state; 
@@ -76,6 +81,8 @@ export class Login extends Component {
     }
 }
 
+// the state passed to mapStateToProps is just for namesake, such a object state is not defined in this file.
+// Refers to the the entire Redux store state (the same value returned by a call to store.getState()).
 const mapStateToProps = state => ({
     isAuthenticated: state.auth?.isAuthenticated
 })

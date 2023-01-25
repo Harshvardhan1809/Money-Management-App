@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import {USER_LOADING, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS} from '../actions/types'
+import {USER_LOADED,USER_LOADING, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS} from '../actions/types'
 
     // // dispatch is a function of Redux which manipulates the store (based on the action)
     // // can be called in component using this.props.dispatch because connect() connects component/prop to state
@@ -27,7 +27,7 @@ export const loadUser = () => (dispatch, getState) => {
     axios.get('api/auth/user', config)
     .then(res => {
         dispatch({
-            type: LOAD_USER, 
+            type: USER_LOADED, 
             payload: res.data
         })
     })
