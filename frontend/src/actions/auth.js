@@ -40,7 +40,7 @@ export const loadUser = () => (dispatch, getState) => {
 }
 
 // LOGIN USER 
-export const login = (username, password) => dispatch => {
+export const login = (email, password) => dispatch => {
 
     // send a request
     const config = {
@@ -51,10 +51,11 @@ export const login = (username, password) => dispatch => {
 
     // Body of the request
     // convert Javascript value to JSON string
-    const body = JSON.stringify({username, password})
+    const body = JSON.stringify({email, password})
+    console.log(body)
 
     // send request
-    axios.post('api/auth/login', config, body)
+    axios.post('api/auth/login', body, config)
     .then(res => {
         dispatch({
             type: LOGIN_SUCCESS, 
@@ -62,6 +63,8 @@ export const login = (username, password) => dispatch => {
         })
     })
     .catch((err) => {
+        console.log(err.request)
+        console.log(err.message)
         dispatch({
             type: LOGIN_FAIL
         })
@@ -94,6 +97,7 @@ export const logout = () => (dispatch, getState) => {
     })
     .catch(err=>{
         // if the token doesnt match 
-        dispatch(returnErrors(err.response.data, err.response.status)); 
+        console.log(err); 
+        // dispatch(returnErrors(err.response.data, err.response.status)); 
     })
 }

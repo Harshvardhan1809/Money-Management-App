@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Route, Routes, Redirect, Link} from 'react-router-dom'
+import {Route, Routes, Navigate, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import { login } from '../../actions/auth'
@@ -8,33 +8,40 @@ import { login } from '../../actions/auth'
 export class Login extends Component {
 
     // State to pass to redux 
-    state = {
-        username: "",
-        password: ""
+    constructor(props){
+        super(props);
+        this.state = {
+            email: "",
+            password: ""
+        }    
     }
-
+    
     static propTypes = {
         login: PropTypes.func.isRequired, 
         isAuthenticated: PropTypes.bool
     }
 
-    onSubmit = (e) => {
-        e.preventDefault(); 
-        console.log("Submit")
-        this.props.login(this.state.username, this.state.password);
+    onSubmit = e => {
+        e.preventDefault();
+        this.props.login(this.state.email, this.state.password);
     }
 
-    onChange = (e) => {
-        this.setState({[e.target.name]: e.target.value})
+    onChange = e => {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
     }
 
+    //  but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render.
+    
     render() {
 
         if(this.props.isAuthenticated){
-             return <Redirect to="/" />; 
+            console.log("navigate"); 
+            return <Navigate to="/front" />; 
         }
 
-        const { username, password } = this.state; 
+        const { email, password } = this.state; 
 
         return (
             <main className="font-mulish">
@@ -44,14 +51,14 @@ export class Login extends Component {
                             <div className="flex flex-col">
                                 <div className="text-2xl mx-auto mb-5">Login</div>
                                 <div className="text-l">
-                                    <form action="" onSubmit={this.onSubmit}>
+                                    <form onSubmit={this.onSubmit}>
                                         <div className="flex flex-col w-full">
-                                            <label htmlFor="username" className="">Username</label>
-                                            <input type="email" placeholder="Enter your username" className="mt-2 mb-5 w-content text-md rounded-md px-3 py-2 placeholder:text-slate-200 bg-slate-500 font-thin" onChange={this.onChange} value={username} />
+                                            <label htmlFor="email" className="">Email</label>
+                                            <input type="email" placeholder="Enter your email" className="mt-2 mb-5 w-content text-md rounded-md px-3 py-2 placeholder:text-slate-200 bg-slate-500 font-thin" name="email" onChange={this.onChange} value={email} />
                                         </div>
                                         <div className="flex flex-col w-full">
                                             <label htmlFor="password" className="">Password</label>
-                                            <input type="password" placeholder="Enter your password" className="mt-2 mb-5 text-md rounded-md px-3 py-2 placeholder:text-slate-200 bg-slate-500 font-thin"  onChange={this.onChange} value={password}/>
+                                            <input type="password" placeholder="Enter your password" className="mt-2 mb-5 text-md rounded-md px-3 py-2 placeholder:text-slate-200 bg-slate-500 font-thin" name="password" onChange={this.onChange} value={password} />
                                         </div>
                                         <button type="submit" className="block text-md rounded-md bg-gray-400 px-5 py-2 mx-auto mt-5">Submit</button>
                                     </form>
@@ -69,8 +76,8 @@ export class Login extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-    isAuthenticated: state.auth.isAuthenticated
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth?.isAuthenticated
 })
 
 export default connect(mapStateToProps, {login})(Login); 
