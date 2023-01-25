@@ -1,7 +1,8 @@
 from .models import User, Account, Expenditure, Spending
 from rest_framework import viewsets, permissions
 from .serializers import AccountSerializer, ExpenditureSerializer, SpendingSerializer, UserSerializer
-
+from datetime import date
+ 
 # Viewset
 # necessary to work with routers
 
@@ -12,7 +13,7 @@ from .serializers import AccountSerializer, ExpenditureSerializer, SpendingSeria
 class UserViewSet(viewsets.ModelViewSet): 
 
     permission_classes = [
-        permissions.AllowAny
+        permissions.IsAuthenticatedOrReadOnly
         #permissions.IsAuthenticated
     ]
 
@@ -29,7 +30,7 @@ class UserViewSet(viewsets.ModelViewSet):
 class AccountViewSet(viewsets.ModelViewSet): 
 
     permission_classes = [
-        permissions.AllowAny
+        permissions.IsAuthenticatedOrReadOnly
     ]
 
     serializer_class = AccountSerializer
@@ -45,7 +46,7 @@ class AccountViewSet(viewsets.ModelViewSet):
 class ExpenditureViewSet(viewsets.ModelViewSet): 
 
     permission_classes = [
-        permissions.AllowAny
+        permissions.IsAuthenticatedOrReadOnly
         #permissions.IsAuthenticated
     ]
 
@@ -63,8 +64,9 @@ class ExpenditureViewSet(viewsets.ModelViewSet):
 class SpendingViewSet(viewsets.ModelViewSet): 
 
     permission_classes = [
-        permissions.AllowAny
+        #permissions.AllowAny
         #permissions.IsAuthenticated
+        permissions.IsAuthenticatedOrReadOnly
     ]
 
     serializer_class = SpendingSerializer
@@ -76,6 +78,49 @@ class SpendingViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer): 
         serializer.save(owner = self.request.user) 
     
+class SpendingDataViewSet(viewsets.ModelViewSet): 
+
+    permission_classes = [
+        permissions.IsAuthenticatedOrReadOnly
+    ]
+
+    serializer_class = SpendingSerializer
+
+    def get_queryset(self, *args, **kwargs): 
+
+        print("Print self.kwargs", self.kwargs)
+        print("Print kwargs", kwargs)   
+
+        data = Spending.objects.all()
+        try: 
+            slug = kwargs["component"]
+        except: 
+            slug = ""
+        try: 
+            user = User.objects.get(id = self.request.user.id)
+        except: 
+            user = AuthToken.objects.last().user
+            print(AuthToken.objects.last())
+
+        account = Account.objects.get(user=user)
+        expenditure = Expenditure.objects.get(account=account)
+
+        print("Print the user", self.request.user)
+
+        if(slug == "carousel"): 
+            today_month = date.today().month() 
+            data = data.filter(expenditure=expenditure).filter(entry__created_at__month = today_month)
+
+        elif (slug == "recent_additions"):
+            print("In recent_additions")
+            data = data.filter(expenditure=expenditure).filter('-id')[:10]
+
+        return data
+
+
+    def perform_create(self, serializer): 
+        serializer.save(owner = self.request.user) 
+
 
 # Using generics to create API for functionalities and knox for tokens
 

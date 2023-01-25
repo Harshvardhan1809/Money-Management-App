@@ -20,17 +20,27 @@ import frontend.views as frontend
 from django.conf.urls.static import static
 from money_management.settings import MEDIA_URL, MEDIA_ROOT
 from money_management.settings import STATIC_URL
-from rest_framework import routers; 
+from rest_framework.routers import Route, DynamicRoute, DefaultRouter; 
 from knox import views as knox_views
-from accounts.api import UserViewSet, AccountViewSet, ExpenditureViewSet, SpendingViewSet, RegisterAPI, LoginAPI, UserAPI
+from accounts.api import UserViewSet, AccountViewSet, ExpenditureViewSet, SpendingViewSet, RegisterAPI, LoginAPI, UserAPI, SpendingDataViewSet 
 import re
 
 # API endpoints 
-router = routers.DefaultRouter()
+
+class CustomRouter(DefaultRouter): 
+    routes = [
+        Route(
+            url=r'^{component}$',
+            initkwargs= {'component': component}
+        )
+    ]
+
+router = CustomRouter()
 router.register('api/user', UserViewSet, 'accounts')
 router.register('api/account', AccountViewSet, 'accounts')
 router.register('api/expenditure', ExpenditureViewSet, 'expenditure')
 router.register('api/spending', SpendingViewSet, 'spending')
+router.register('api/spending_data/', SpendingDataViewSet, 'spending_data')
 
 auth_url_patterns = [
     path('api/auth', include('knox.urls')), 
