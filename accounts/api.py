@@ -1,8 +1,9 @@
 from .models import User, Account, Expenditure, Spending
 from rest_framework import viewsets, permissions
 from .serializers import AccountSerializer, ExpenditureSerializer, SpendingSerializer, UserSerializer
-from datetime import date
- 
+import datetime
+from rest_framework.decorators import action
+from rest_framework.renderers import StaticHTMLRenderer
 # Viewset
 # necessary to work with routers
 
@@ -77,7 +78,8 @@ class SpendingViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer): 
         serializer.save(owner = self.request.user) 
-    
+
+
 class SpendingDataViewSet(viewsets.ModelViewSet): 
 
     permission_classes = [
@@ -86,14 +88,18 @@ class SpendingDataViewSet(viewsets.ModelViewSet):
 
     serializer_class = SpendingSerializer
 
-    def get_queryset(self, *args, **kwargs): 
+    # Substitutes for def get_queryset 
+    queryset = Spending.objects.all()
+
+    @action(detail=True, renderer_classes=[StaticHTMLRenderer])
+    def component_data(self, *args, **kwargs): 
 
         print("Print self.kwargs", self.kwargs)
         print("Print kwargs", kwargs)   
 
         data = Spending.objects.all()
         try: 
-            slug = kwargs["component"]
+            slug = self.kwargs["component"]
         except: 
             slug = ""
         try: 
@@ -102,21 +108,28 @@ class SpendingDataViewSet(viewsets.ModelViewSet):
             user = AuthToken.objects.last().user
             print(AuthToken.objects.last())
 
+        print("This is the slug")
+        print(slug)
+
         account = Account.objects.get(user=user)
         expenditure = Expenditure.objects.get(account=account)
 
         print("Print the user", self.request.user)
 
         if(slug == "carousel"): 
-            today_month = date.today().month() 
-            data = data.filter(expenditure=expenditure).filter(entry__created_at__month = today_month)
+            today_month = datetime.datetime.now().month
+            # https://stackoverflow.com/questions/28189442/datetime-current-year-and-month-in-python
+            data = data.filter(expenditure=expenditure)
+            data = data.filter(date__month = today_month)
+            # https://docs.djangoproject.com/en/4.1/topics/db/queries/#queryset-model-example
 
         elif (slug == "recent_additions"):
             print("In recent_additions")
-            data = data.filter(expenditure=expenditure).filter('-id')[:10]
+            data = data.filter(expenditure=expenditure)
+            data = data.filter('-id')[:10]
 
-        return data
-
+        # return data
+        return Response(data)
 
     def perform_create(self, serializer): 
         serializer.save(owner = self.request.user) 
@@ -170,3 +183,7 @@ class UserAPI(generics.RetrieveAPIView):
     # For the Postman request, do a GET request, in the Header, set Authorization as: Token {token}
     def get_object(self):
         return self.request.user
+
+
+# # Spending Data API 
+# class SpendingDataAPI(generics.RetrieveAPIView)

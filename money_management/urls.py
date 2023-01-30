@@ -24,31 +24,38 @@ from rest_framework.routers import Route, DynamicRoute, DefaultRouter;
 from knox import views as knox_views
 from accounts.api import UserViewSet, AccountViewSet, ExpenditureViewSet, SpendingViewSet, RegisterAPI, LoginAPI, UserAPI, SpendingDataViewSet 
 import re
+from rest_framework import renderers
+
+# Bind Viewsets to URLs explicitly
+# Make the viewsets more functional using actions 
+# https://www.django-rest-framework.org/tutorial/6-viewsets-and-routers/ 
+spending_data_component = SpendingDataViewSet.as_view({
+    'get': 'component_data'
+}, renderer_classes=[renderers.StaticHTMLRenderer]
+)
+spending_data_list = SpendingDataViewSet.as_view({
+    'get': 'list', 
+    'get': 'retrieve'
+})
 
 # API endpoints 
-
-class CustomRouter(DefaultRouter): 
-    routes = [
-        Route(
-            url=r'^{component}$',
-            initkwargs= {'component': component}
-        )
-    ]
-
-router = CustomRouter()
+router = DefaultRouter()
 router.register('api/user', UserViewSet, 'accounts')
 router.register('api/account', AccountViewSet, 'accounts')
 router.register('api/expenditure', ExpenditureViewSet, 'expenditure')
 router.register('api/spending', SpendingViewSet, 'spending')
-router.register('api/spending_data/', SpendingDataViewSet, 'spending_data')
+# router.register(r'api/spending_data/(?P<component>.+)/$', SpendingDataViewSet, "spending_data")
 
 auth_url_patterns = [
     path('api/auth', include('knox.urls')), 
     path('api/auth/register', RegisterAPI.as_view()), 
     path('api/auth/login', LoginAPI.as_view()),
     path('api/auth/user', UserAPI.as_view()), 
-    path('api/auth/logout', knox_views.LogoutView.as_view(), name="knox_logout")
-
+    path('api/auth/logout', knox_views.LogoutView.as_view(), name="knox_logout"), 
+    re_path('api/spending_data/(?P<component>\w+)/$', spending_data_component, name="spending_data_component"),
+    # Important: It seems DRF does not accept Django path expression but, the regex expression
+    # https://stackoverflow.com/questions/70674270/how-to-pass-extra-parameter-to-django-rest-custom-action-inside-the-viewset 
+    path('api/spending_data/', spending_data_list, name="spending_data_list"),
 ]
 
 
