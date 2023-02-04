@@ -35,7 +35,7 @@ spending_data_component = SpendingDataViewSet.as_view({
 )
 spending_data_list = SpendingDataViewSet.as_view({
     'get': 'list', 
-    'get': 'retrieve'
+    #'get': 'retrieve'
 })
 
 # API endpoints 

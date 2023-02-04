@@ -38,12 +38,7 @@ export class Login extends Component {
     render() {
 
         if(this.props.isAuthenticated | store.getState.auth?.isAuthenticated){
-            console.log("navigate"); 
             return <Navigate to="/front" />; 
-        }
-        else{
-            console.log("Printing this.state", this.state)
-            console.log("Printing props", this.props)
         }
 
         const { email, password } = this.state; 

@@ -1,9 +1,10 @@
+import { faObjectGroup } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios"
+import { eng_spending_choices } from "../../static/utilities/eng_spending_choices";
 
 import { GET_RECENT_ADDITIONS, GET_CAROUSEL_DATA } from "./types"
 
 const moment = require('moment');
-import {default as dt} from "py-datetime";
 
 // GET_RECENT_ADDITIONS
 export const getRecentAdditions = () => (dispatch, getState) => {
@@ -26,8 +27,16 @@ export const getRecentAdditions = () => (dispatch, getState) => {
     })
         .then(res => {
 
-            // Limit the number of recent additions to 10 
-            let payload = res.data; 
+            let payload_initial = res.data; 
+            // res.data is basically an array of objects
+            // the component data should be an array of objects, where each spending is an object
+            let payload = []
+
+            for(let i=0; i<payload_initial.length; i++){
+                payload[i] = payload_initial[i].fields
+            }
+
+            // Make sure only 10 objects are sent 
             if(res.data.length > 10) payload = res.data.spendings.slice(0,10)
                
             dispatch({
@@ -35,7 +44,7 @@ export const getRecentAdditions = () => (dispatch, getState) => {
                 payload: payload
             })
         })
-        .catch(err => console.log("Error occured"))
+        .catch(err => console.log("Error occured in recent additions ", err.message))
 
 }
 
@@ -59,9 +68,29 @@ export const getCarouselData = () => (dispatch, getState) => {
     axios.get('api/spending_data/carousel', config)
     .then(res => {
 
-        console.log(res.data)
+        let payload_initial = res.data; 
+        let payload_mid = []; 
+        let payload = {}; 
+
+        for(let i=0; i<payload_initial.length; i++){
+            payload_mid[i] = payload_initial[i].fields
+        }
+
+        // generate an object similar to the state for carousel data
+        const spending_keys = Object.keys(eng_spending_choices)
+        for(let i=0; i<spending_keys.length; i++){
+            payload[`${spending_keys[i]}`] = 0; 
+        }
+        for(let i=0; i<payload_mid.length; i++){
+            payload[`${payload_mid[i].type1}`] += +payload_mid[i].amount
+        }
+
+        dispatch({
+            type: GET_CAROUSEL_DATA,
+            payload: payload
+        })
 
     })
-    .catch(err => console.log("Error occured"))
+    .catch(err => console.log("Error occured for carousel", err.message))
 
 }
