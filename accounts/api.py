@@ -1,7 +1,11 @@
 from .models import User, Account, Expenditure, Spending
 from rest_framework import viewsets, permissions
 from .serializers import AccountSerializer, ExpenditureSerializer, SpendingSerializer, UserSerializer
-
+import datetime
+from rest_framework.decorators import action, renderer_classes
+from rest_framework.renderers import BrowsableAPIRenderer, TemplateHTMLRenderer, JSONRenderer
+from django.core import serializers
+import json 
 # Viewset
 # necessary to work with routers
 
@@ -12,7 +16,7 @@ from .serializers import AccountSerializer, ExpenditureSerializer, SpendingSeria
 class UserViewSet(viewsets.ModelViewSet): 
 
     permission_classes = [
-        permissions.AllowAny
+        permissions.IsAuthenticatedOrReadOnly
         #permissions.IsAuthenticated
     ]
 
@@ -29,7 +33,7 @@ class UserViewSet(viewsets.ModelViewSet):
 class AccountViewSet(viewsets.ModelViewSet): 
 
     permission_classes = [
-        permissions.AllowAny
+        permissions.IsAuthenticatedOrReadOnly
     ]
 
     serializer_class = AccountSerializer
@@ -45,7 +49,7 @@ class AccountViewSet(viewsets.ModelViewSet):
 class ExpenditureViewSet(viewsets.ModelViewSet): 
 
     permission_classes = [
-        permissions.AllowAny
+        permissions.IsAuthenticatedOrReadOnly
         #permissions.IsAuthenticated
     ]
 
@@ -63,8 +67,9 @@ class ExpenditureViewSet(viewsets.ModelViewSet):
 class SpendingViewSet(viewsets.ModelViewSet): 
 
     permission_classes = [
-        permissions.AllowAny
+        #permissions.AllowAny
         #permissions.IsAuthenticated
+        permissions.IsAuthenticatedOrReadOnly
     ]
 
     serializer_class = SpendingSerializer
@@ -75,7 +80,65 @@ class SpendingViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer): 
         serializer.save(owner = self.request.user) 
-    
+
+
+class SpendingDataViewSet(viewsets.ModelViewSet): 
+
+    permission_classes = [
+        permissions.IsAuthenticatedOrReadOnly
+    ]
+
+    serializer_class = SpendingSerializer
+
+    # Substitutes for def get_queryset 
+    # queryset = Spending.objects.all()
+    def get_queryset(self): 
+        return Spending.objects.all()
+        #return self.request.user.spendings.all()
+
+    @action(detail=True, methods=['get']) 
+    @renderer_classes([TemplateHTMLRenderer, JSONRenderer, BrowsableAPIRenderer])
+    def component_data(self, *args, **kwargs): 
+
+        print("Print self.kwargs", self.kwargs)
+
+        data = Spending.objects.all()
+        try: 
+            slug = self.kwargs["component"]
+        except: 
+            slug = ""
+
+        try: 
+            user = User.objects.get(id = self.request.user.id)
+        except: 
+            user = AuthToken.objects.last().user
+
+        account = Account.objects.get(user=user)
+        expenditure = Expenditure.objects.get(account=account)
+
+        if(slug == "carousel"): 
+            today_month = datetime.datetime.now().month
+            # https://stackoverflow.com/questions/28189442/datetime-current-year-and-month-in-python
+            data = data.filter(expenditure=expenditure)
+            data = data.filter(date__month = today_month)
+            # https://docs.djangoproject.com/en/4.1/topics/db/queries/#queryset-model-example
+
+            print(data)
+
+        elif (slug == "recent_additions"):
+            data = data.filter(expenditure=expenditure)
+            data = data.order_by('-id')[:10]
+
+        # return data
+
+        # Convert to JSON
+        data = serializers.serialize("json",data)
+
+        return Response(data)
+
+    def perform_create(self, serializer): 
+        serializer.save(owner = self.request.user) 
+
 
 # Using generics to create API for functionalities and knox for tokens
 
@@ -125,3 +188,7 @@ class UserAPI(generics.RetrieveAPIView):
     # For the Postman request, do a GET request, in the Header, set Authorization as: Token {token}
     def get_object(self):
         return self.request.user
+
+
+# # Spending Data API 
+# class SpendingDataAPI(generics.RetrieveAPIView)

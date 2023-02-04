@@ -10,8 +10,8 @@ export class Routing extends React.Component {
     return (
       <Fragment>
           <Routes>
-              <Route path="register" element={<Register />} />
-              <Route path="login" element={<Login />} />
+              <Route exact path="register" element={<Register />} />
+              <Route exact path="login" element={<Login />} />
           </Routes>
       </Fragment>
     )
