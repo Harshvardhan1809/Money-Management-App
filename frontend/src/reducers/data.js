@@ -1,4 +1,4 @@
-import { GET_RECENT_ADDITIONS, GET_CAROUSEL_DATA } from "../actions/types.js"
+import { GET_RECENT_ADDITIONS, GET_CAROUSEL_DATA, GET_OVERVIEW_DATA } from "../actions/types.js"
 import { eng_spending_choices } from "../../static/utilities/eng_spending_choices.js"
 
 // for the carousel data we need a different structure  
@@ -12,7 +12,9 @@ for(let i=0; i<spending_keys.length; i++){
 const initialComponentState = {
     user_data: [], 
     recent_spendings: [], 
-    carousel_data : carousel_spending
+    carousel_data : carousel_spending,
+    overview_graph_data: {},
+    overview_data : {}
 }
 
 // For expenditure
@@ -23,16 +25,6 @@ const initialExpenditureState = {
 // For account
 const initialAccountState = {
     account: []
-}
-
-// For user
-const initialUserState = {
-    account: []
-}
-
-// For dummy blank state 
-const dummyBlank = {
-    data: []
 }
 
 // For dummy blank state 
