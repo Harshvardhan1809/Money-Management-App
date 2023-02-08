@@ -1,4 +1,4 @@
-import { GET_RECENT_ADDITIONS, GET_CAROUSEL_DATA, GET_OVERVIEW_DATA } from "../actions/types.js"
+import { GET_RECENT_ADDITIONS, GET_CAROUSEL_DATA, GET_OVERVIEW_DATA, GET_OVERVIEW_GRAPH } from "../actions/types.js"
 import { eng_spending_choices } from "../../static/utilities/eng_spending_choices.js"
 
 // for the carousel data we need a different structure  
@@ -13,8 +13,8 @@ const initialComponentState = {
     user_data: [], 
     recent_spendings: [], 
     carousel_data : carousel_spending,
-    overview_graph_data: {},
-    overview_data : {}
+    overview_data : {},
+    overview_graph : []
 }
 
 // For expenditure
@@ -32,9 +32,7 @@ const initialCarouselState = {
     data: []
 }
 
-
 // Reducers
-
 // Reducer for spendings
 export default function(state = initialComponentState, action) {
 
@@ -53,6 +51,24 @@ export default function(state = initialComponentState, action) {
             return {
                 ...state, 
                 carousel_data: action.payload 
+            }
+
+        case GET_OVERVIEW_DATA: 
+
+            console.log("Print the action.payload for overview data", action.payload)
+
+            return {
+                ...state, 
+                overview_data: action.payload 
+            }
+
+        case GET_OVERVIEW_GRAPH: 
+
+            console.log("Print the action.payload for overview graph", action.payload)
+
+            return {
+                ...state, 
+                overview_graph: action.payload 
             }
 
         default:

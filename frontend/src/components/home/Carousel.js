@@ -6,7 +6,7 @@ import { getCarouselData } from '../../actions/data'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { eng_spending_choices } from '../../../static/utilities/eng_spending_choices'
-
+ 
 export class Carousel extends React.Component {
 
     // define the proptypes

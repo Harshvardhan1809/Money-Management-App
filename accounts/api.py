@@ -100,8 +100,6 @@ class SpendingDataViewSet(viewsets.ModelViewSet):
     @renderer_classes([TemplateHTMLRenderer, JSONRenderer, BrowsableAPIRenderer])
     def component_data(self, *args, **kwargs): 
 
-        print("Print self.kwargs", self.kwargs)
-
         data = Spending.objects.all()
         try: 
             slug = self.kwargs["component"]
@@ -123,16 +121,71 @@ class SpendingDataViewSet(viewsets.ModelViewSet):
             data = data.filter(date__month = today_month)
             # https://docs.djangoproject.com/en/4.1/topics/db/queries/#queryset-model-example
 
-            print(data)
+
+            # serializers.serialize only serializes qiuerysets to json 
+            data = serializers.serialize("json",data)
+
 
         elif (slug == "recent_additions"):
             data = data.filter(expenditure=expenditure)
-            data = data.order_by('-id')[:10]
+            data = data.order_by('-date')[:10]
 
-        # return data
+                    # serializers.serialize only serializes qiuerysets to json 
+            data = serializers.serialize("json",data)
 
-        # Convert to JSON
-        data = serializers.serialize("json",data)
+        elif (slug == "overview_data"):
+
+            # current day and month
+            today_date = datetime.date.today().weekday()
+            today_month = datetime.datetime.now().month
+            today = datetime.datetime.now().day
+            # last month 
+            last_month = (today_month-1)%12
+            if(last_month == 0) : 
+                last_month = 12
+            # yesterday 
+            yesterday = datetime.datetime.today() - datetime.timedelta(days=1)
+            # last week 
+            last_week_begin = datetime.datetime.today() - datetime.timedelta( days = (7+today_date) )
+            last_week_end = datetime.datetime.today() - datetime.timedelta( days = (today_date) )
+
+            total_today = data.filter(expenditure=expenditure).filter(date__month = today_month).filter(date__day = today)
+            total_yesterday = data.filter(expenditure=expenditure).filter(date__month = today_month).filter(date__day = yesterday.day)
+            total_last_week = data.filter(expenditure=expenditure).filter(date__gte = last_week_begin).filter(date__lte = last_week_end)
+            total_last_month = data.filter(expenditure=expenditure).filter(date__month = last_month)
+
+            t_value = 0
+            y_value = 0
+            w_value = 0
+            m_value = 0
+
+            for i in range(0,len(total_today)): 
+                t_value += float(total_today[i].amount)
+            for i in range(0,len(total_yesterday)): 
+                y_value += float(total_yesterday[i].amount)
+            for i in range(0,len(total_last_week)): 
+                w_value += float(total_last_week[i].amount)
+            for i in range(0,len(total_yesterday)): 
+                m_value += float(total_last_month[i].amount)
+
+            overview_data = {
+                'total_today': t_value, 
+                'total_yesterday': y_value, 
+                'total_last_week': w_value, 
+                'total_last_month': m_value, 
+            }   
+
+            print("Print overview_data")
+            print(overview_data)
+
+            data = json.dumps(overview_data)
+
+        elif (slug == "overview_graph"):
+
+            today_month = datetime.datetime.now().month
+            overview_graph_data = data.filter(expenditure=expenditure).filter(date__month = today_month)
+            data = serializers.serialize("json",overview_graph_data) 
+
 
         return Response(data)
 
