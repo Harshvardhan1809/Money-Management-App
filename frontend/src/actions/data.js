@@ -111,10 +111,7 @@ export const getOverviewData = () => (dispatch, getState) => {
     .then(res => {
 
         let payload = res.data; 
-
-        console.log("Print the payload for overview data")
-        console.log(payload)
-
+        
         dispatch({
             type: GET_OVERVIEW_DATA,
             payload: payload
@@ -174,5 +171,38 @@ export const getOverviewGraph = () => (dispatch, getState) => {
 
     })
     .catch(err => console.log("Error occured for overview graph", err.message))
+
+}
+
+export const postSpending = (amount, type1, type2, date, memo) => {
+
+    const token = getState.auth.token;
+    const config = {
+        headers: {
+            'Content-type': 'application/json' 
+        }
+    }
+    // If token, add to headers config
+    if (token) {
+        config.headers['Authorization'] = `Token ${token}`;
+    }
+
+    console.log("IN THE ACTION")
+
+    const body = JSON.stringify({amount, type1, type2, date, memo})
+
+    axios.post('/api/spending', body, config)
+    .then(res => {
+
+        console.log("Response for the form", res)
+
+        dispatch({
+            type: POST_SPENDING, 
+            payload: res.data
+        })
+    })
+    .catch(err => {
+        console.log("Error while posting the spending",err.message)
+    })
 
 }

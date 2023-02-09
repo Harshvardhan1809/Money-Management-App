@@ -31,7 +31,7 @@ const renderActiveShape = (props) => {
         <g>
             <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
             {eng_spending_choices[`${payload.name}`]}
-            </text> 
+            </text>  
             <Sector
             cx={cx}
             cy={cy}

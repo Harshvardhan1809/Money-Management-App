@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { getCarouselData } from '../../actions/data'
+import { getCarouselData } from '../../actions/data' 
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { eng_spending_choices } from '../../../static/utilities/eng_spending_choices'

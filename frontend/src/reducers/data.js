@@ -1,4 +1,4 @@
-import { GET_RECENT_ADDITIONS, GET_CAROUSEL_DATA, GET_OVERVIEW_DATA, GET_OVERVIEW_GRAPH } from "../actions/types.js"
+import { GET_RECENT_ADDITIONS, GET_CAROUSEL_DATA, GET_OVERVIEW_DATA, GET_OVERVIEW_GRAPH, POST_SPENDING } from "../actions/types.js"
 import { eng_spending_choices } from "../../static/utilities/eng_spending_choices.js"
 
 // for the carousel data we need a different structure  
@@ -69,6 +69,14 @@ export default function(state = initialComponentState, action) {
             return {
                 ...state, 
                 overview_graph: action.payload 
+            }
+
+        case POST_SPENDING: 
+
+            console.log("Print the action.payload for adding a spending", action.payload)
+
+            return {
+                ...state 
             }
 
         default:
