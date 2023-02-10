@@ -1,15 +1,22 @@
 import React, {Fragment} from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Sidebar() {
   return (
         <aside id="sidebar" className="flex-shrink-0 flex flex-row bg-slate-200 border border-r-300 overflow-x:hidden h-full overflow-y:hidden ">
         <div className="items-center mt-28 mx-auto">
             <div className="flex flex-col space-y-6 py-2 px-10">
-                <a href="./dashboard-hero.html">Dashboard</a>
-                <a href="./monthly-expenditure.html">Monthly Expenditure</a>
-                <a href="./this-month.html">This Month</a>
-                <a href="./account.html">Account</a>
-                <a href="./settings.html">Settings</a>
+                
+                <Link to="/">Dashboard</Link>
+                <Link to="/monthly_expenditure">Monthly Expenditure</Link>
+                <Link to="/this_month">This Month</Link>
+                <Link to="/account">Account</Link>
+                <Link to="/settings">Settings</Link>
+                {/* <a href="./dashboard-hero.html">Dashboard</a> */}
+                {/* <a href="./monthly-expenditure.html">Monthly Expenditure</a>
+                <a href="./this-month.html">This Month</a> */}
+                {/* <a href="./account.html">Account</a> */}
+                {/* <a href="./settings.html">Settings</a> */}
             </div>
             <div className="flex flex-col mt-14 mx-2">
                 <div className="bg-black text-white px-4 py-3 rounded-lg">

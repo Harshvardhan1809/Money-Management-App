@@ -43,7 +43,7 @@ class App extends Component {
                     <Fragment>
                         <Routes>
                             <Route element={<PrivateRoute />} >
-                                <Route exact path="/front" element={<Dashboard />} />
+                                <Route path="/*" element={<Dashboard />} />
                             </Route>
                             <Route exact path="/register" element={<Register />} />
                             <Route exact path="/login" element={<Login />} />

@@ -1,5 +1,6 @@
 import React, {Fragment} from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 export class Navbar extends React.Component {
 
@@ -52,18 +53,14 @@ export class Navbar extends React.Component {
                                         </button>
                                     </div>
                                 </form>
-                                <a href="./account.html">
-                                    <i className="fa fa-thin fa-user fa-xl"></i>
-                                </a>
+                                <Link to="/account"><i className="fa fa-thin fa-user fa-xl"></i></Link>
                                 <a href="#">
                                     <i className="fa fa-thin fa-gift fa-xl"></i>
                                 </a>
                                 <a href="#">
                                     <i className="fa fa-thin fa-bell fa-xl"></i>
                                 </a>
-                                <a href="./settings.html">
-                                    <i className="fa fa-thin fa-gear fa-xl"></i>
-                                </a>
+                                <Link to="/settings"> <i className="fa fa-thin fa-gear fa-xl"></i></Link>
                             </div>
                         </div>
                     </div>
@@ -76,3 +73,10 @@ export class Navbar extends React.Component {
 }
 
 export default Navbar
+
+{/* <a href="./account.html">
+    <i className="fa fa-thin fa-user fa-xl"></i>
+</a> */}
+{/* <a href="./settings.html">
+    <i className="fa fa-thin fa-gear fa-xl"></i>
+</a> */}
