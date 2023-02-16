@@ -12,8 +12,8 @@ onload = (event) => {
         e.preventDefault(); 
         sidebar.classList.toggle('hidden');
         sidebar_minimize.classList.toggle('hidden'); 
+        console.log("Hi"); 
     })
-    
 
 }
 

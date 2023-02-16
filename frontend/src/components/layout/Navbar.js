@@ -34,8 +34,8 @@ export class Navbar extends React.Component {
 
         return (
     
-            <div className="top-0 w-screen inset-0" id="unscrollable-wrapper">
-                <nav className="z-50 nav bg-white">
+            <div className="fixed w-screen fixed flex h-4" id="unscrollable-wrapper">
+                <nav className="z-50 nav bg-white" id="navbar-nav">
                     <div className="flex items-center justify-between pr-2">
                         <div>
                             <button className="ml-8" onClick={this.onClick}>Money Management</button>

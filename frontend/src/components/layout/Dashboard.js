@@ -11,19 +11,32 @@ import MonthlyExpenditure from '../monthly_expenditure/MonthlyExpenditure'
 import ThisMonth from '../this_month/ThisMonth'
 import {HashRouter as Router, Route, Routes, Redirect} from 'react-router-dom'
 
+// tips to adjust the height and width
+// height -> set the height to accomodate the entire contents
+// then set the height of the sidebar and content to fill the height 
+// width -> make the content component fill the entire width 
+
 export default function Dashboard() {
 
     const prop = {
         hi: "hello"
     }
 
+    // container grow mx-auto w-screen flex h-fit font-mulish overflow-hidden
+
     return (
         <Fragment>
             <Navbar />
-            <section id="container" className="container mx-auto flex h-screen font-mulish">
+            <div id="dummy_blank_nav" className="w-screen h-[67px] p-2 h-full"></div>
+            <div id="dummy_blank_nav" className="w-screen h-[67px] p-2 h-full"></div>
+            <div id="dummy_blank_nav" className="w-screen h-[67px] p-2 h-full"></div>
+            <div id="dummy_blank_nav" className="w-screen h-[67px] p-2 h-full"></div>
+            <section id="" className="flex font-mulish w-screen">
+                <div id="dummy_blank_div">
+                </div>
                 <Sidebar />
                 <Mini_Sidebar />
-                <main>
+                <main class=" grow">
                     <Routes>
                         <Route exact path="" element={<Home/>}/>
                         <Route exact path="/this_month" element={<ThisMonth/>}/>

@@ -12,7 +12,7 @@ export default function Home() {
   return (
         <Fragment>
 
-            <div id="hero" className="px-12 pt-1 pb-4 bg-slate-100 h-screen w-fit overflow-scroll max-w-fit">
+            <div id="hero" className="flex-1 px-12 pt-1 pb-4 bg-slate-100 h-full w-full overflow-y-scroll">
 
                 <div className="flex justify-between w-full items-center">
                     <div >

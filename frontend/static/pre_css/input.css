@@ -14,4 +14,7 @@
     .carousel-item{
         @apply border border-gray-200 py-5 px-5 mr-4 rounded-[10px] w-[250px] bg-white shrink-0
     }
+    .fixed-trick{
+        @apply -webkit-transform: translateZ(0)
+    }
 }
