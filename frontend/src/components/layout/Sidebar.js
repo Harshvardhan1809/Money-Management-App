@@ -6,7 +6,8 @@ import { Link } from 'react-router-dom'
 
 export default function Sidebar() {
   return (
-        <aside id="sidebar" className=" flex-shrink-0 flex flex-row bg-slate-200 border border-r-300 ">
+    <Fragment>
+        <aside id="sidebar" className="fixed flex-shrink-0 flex flex-row bg-slate-200 border border-r-300 ">
             <div className="items-center mt-28 mx-auto">
                 <div className="flex flex-col space-y-6 py-2 px-10">
                     
@@ -37,5 +38,6 @@ export default function Sidebar() {
                 </div>
             </div>
         </aside>
+    </Fragment>
   )
 }

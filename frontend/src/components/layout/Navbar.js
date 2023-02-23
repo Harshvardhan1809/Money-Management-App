@@ -9,6 +9,8 @@ export class Navbar extends React.Component {
     constructor(props){
         super(props);
         this.onClick = this.onClick.bind(this);
+        console.log("Printing the props passed",this.props); 
+        console.log("Printing the props passed",this.props.func); 
     }
 
     state = {
@@ -27,10 +29,12 @@ export class Navbar extends React.Component {
         const {redirect} = this.state;  
         console.log("Print the value", redirect)
 
-        if(redirect){
-            // pressing this, you just have to change the component displayed in the dashboard from Home to something else 
-            // return (<Navigate to="/front" />)
-        }
+        // if(redirect){
+        //     // pressing this, you just have to change the component displayed in the dashboard from Home to something else 
+        //     // return (<Navigate to="/front" />)
+        // }
+
+        // use state -> pass the state changing function as a prop to child. call the function from child 
 
         return (
     
@@ -39,7 +43,7 @@ export class Navbar extends React.Component {
                     <div className="flex items-center justify-between pr-2">
                         <div>
                             <button className="ml-8" onClick={this.onClick}>Money Management</button>
-                            <button className="ml-8" id="sidebar-button">
+                            <button className="ml-8" id="sidebar-button" onClick={this.props.func}>
                                 <i className="fa fa-thin fa-bars fa"></i>
                             </button>
                         </div>

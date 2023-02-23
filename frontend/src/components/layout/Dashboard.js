@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react'
+import React, {Fragment, useState} from 'react'
 
 import Navbar from './Navbar'
 import Sidebar from './Sidebar'
@@ -18,25 +18,71 @@ import {HashRouter as Router, Route, Routes, Redirect} from 'react-router-dom'
 
 export default function Dashboard() {
 
-    const prop = {
-        hi: "hello"
+    // container grow mx-auto w-screen flex h-fit font-mulish overflow-hidden
+
+    const [state, setBool] = useState(false); 
+
+    function handleClick(){
+        console.log("handle click is called"); 
+        console.log('Print state in dashboard', state); 
+        setBool(state => !state); 
     }
 
-    // container grow mx-auto w-screen flex h-fit font-mulish overflow-hidden
+    const hello = () => {
+        console.log("Hello World"); 
+        console.log("Inside here"); 
+        if(state) {
+            console.log("State is true");
+            Array(14).fill(0).map(val => {
+                return(<div className="p-2 h-screen"> </div>)
+            })
+        }
+        else{
+            console.log("State is false");
+            Array(2).fill(0).map(val => {
+                return(<div className="p-2 h-screen"> </div>)
+            })
+        }
+    }
+
+    // when writing a function in the component, we need a callback function 
+    // that's why we need Array.map(cal => { }) or () => { ()=> { } }
 
     return (
         <Fragment>
-            <Navbar />
-            <div id="dummy_blank_nav" className="w-screen h-[67px] p-2 h-full"></div>
-            <div id="dummy_blank_nav" className="w-screen h-[67px] p-2 h-full"></div>
-            <div id="dummy_blank_nav" className="w-screen h-[67px] p-2 h-full"></div>
-            <div id="dummy_blank_nav" className="w-screen h-[67px] p-2 h-full"></div>
+            <Navbar func={handleClick}/>
+            {   
+                Array(4).fill(0).map(val => {
+                    console.log("Rendering again");
+                    return(<div id="dummy_blank_nav" className="w-screen h-[67px] p-2 h-full"></div>)
+                })
+            }
             <section id="" className="flex font-mulish w-screen">
-                <div id="dummy_blank_div">
-                </div>
+                {   
+                    // hello()
+                    Array(14).fill(0).map(val => {
+                        return(<div className="p-2 h-screen"> </div>)
+                    })
+                    // () => {
+                    //         console.log("Inside here"); 
+                    //         if(state) {
+                    //             console.log("State is true");
+                    //             Array(14).fill(0).map(val => {
+                    //                 return(<div className="p-2 h-screen"> </div>)
+                    //             })
+                    //         }
+                    //         else{
+                    //             console.log("State is false");
+                    //             Array(2).fill(0).map(val => {
+                    //                 return(<div className="p-2 h-screen"> </div>)
+                    //             })
+                    //         }
+                    //     }
+                    
+                }
                 <Sidebar />
                 <Mini_Sidebar />
-                <main class=" grow">
+                <main className=" grow">
                     <Routes>
                         <Route exact path="" element={<Home/>}/>
                         <Route exact path="/this_month" element={<ThisMonth/>}/>
@@ -51,6 +97,9 @@ export default function Dashboard() {
     )
 }
 
+function handler(){
+    console.log("Hello World"); 
+}
 
                     // {/* <Routes>
                     //     <Route exact path="settings" element={<Settings/> } />
