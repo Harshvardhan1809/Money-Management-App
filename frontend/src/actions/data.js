@@ -1,8 +1,7 @@
-import { faObjectGroup } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios"
 import { eng_spending_choices } from "../../static/utilities/eng_spending_choices";
 
-import { GET_RECENT_ADDITIONS, GET_CAROUSEL_DATA, GET_OVERVIEW_GRAPH, GET_OVERVIEW_DATA } from "./types"
+import { GET_RECENT_ADDITIONS, GET_CAROUSEL_DATA, GET_OVERVIEW_GRAPH, GET_OVERVIEW_DATA, POST_SPENDING } from "./types"
 
 const moment = require('moment');
 
@@ -15,6 +14,7 @@ export const getRecentAdditions = () => (dispatch, getState) => {
         }
     }
     const token = getState().auth.token; 
+    console.log("THIS IS THE TOKEN ", token)
     if(token){
         config.headers['Authorization'] = `Token ${token}`; 
     }
@@ -174,27 +174,28 @@ export const getOverviewGraph = () => (dispatch, getState) => {
 
 }
 
-export const postSpending = (amount, type1, type2, date, memo) => {
+export const postSpending = (amount, type1, type2, date, memo) => async (dispatch, getState) => {
 
-    const token = getState.auth.token;
+    const token = getState().auth.token;
     const config = {
         headers: {
-            'Content-type': 'application/json' 
+            'Content-Type': 'application/json' 
         }
     }
     // If token, add to headers config
     if (token) {
         config.headers['Authorization'] = `Token ${token}`;
     }
+    console.log(token)
+    // const body = JSON.stringify({amount, type1, type2, date, memo})
 
-    console.log("IN THE ACTION")
+    const expenditure = 1; 
+    const body = JSON.stringify({amount, type1, type2, date, memo}); 
 
-    const body = JSON.stringify({amount, type1, type2, date, memo})
-
-    axios.post('/api/spending', body, config)
+    await axios.post('/api/spending/', body, config)
     .then(res => {
 
-        console.log("Response for the form", res)
+        console.log("IN THEN")
 
         dispatch({
             type: POST_SPENDING, 
@@ -203,6 +204,7 @@ export const postSpending = (amount, type1, type2, date, memo) => {
     })
     .catch(err => {
         console.log("Error while posting the spending",err.message)
+        console.log("Print the error",err)
     })
 
 }

@@ -22,6 +22,7 @@ export class Carousel extends React.Component {
     }
 
     render(){
+
         return (
         <div className="carousel flex overflow-scroll flex-nowrap">
 

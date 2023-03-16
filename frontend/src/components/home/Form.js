@@ -2,7 +2,7 @@ import React, {Fragment} from 'react'
 import { eng_spending_choices } from '../../../static/utilities/eng_spending_choices';
 import { eng_spending_type } from '../../../static/utilities/eng_spending_type';
 import { spending_type } from '../../../static/utilities/spending_type';
-import { postSpending } from '../../actions/data';
+import { postSpending, getRecentAdditions } from '../../actions/data';
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -44,20 +44,44 @@ export class Form extends React.Component {
         console.log(this.state)
     }
 
-    onSubmit = e => {
+    onSubmit = async (e) => {
         e.preventDefault(); 
-        this.props.postSpending();    
+        const {amount, type1, type2, date, memo} = this.state; 
+        // try to make the axios call synchronous so that component updates after saving in db
+        const a = await this.props.postSpending(amount, type1, type2, date, memo);  
+        // MAKE THE COMPONENT RELOAD SO THAT NEW DATA CAN BE FETCHED 
+        console.log("Now make the component rerender");
+        this.props.func(); 
+
+        // the below setState won't help because it doesn't rerender the Recent Additions
+        // component and the state won't get updated
+        // need to make the whole Home component rerender on submission
+        this.setState({
+            amount: 0,
+            type1:'shokuji',
+            type2:'',
+            date: this.currentDate(),
+            memo: ''
+        })
+
+        // First this function gets completely executed and then the action is carried out
+        console.log("Understand the flow of component")
     }
+
+    // AIM
+    // form submit -> action completes -> make recentAdditions (whole ) rerender -> 
+    // should have lifted state up to the Home component so that rerendering would be been easy
+    // or make synchronous API response, get data added and then rerender the components
 
     render(){
 
         const { amount, type1, type2, date, memo } = this.state; 
-        console.log("Printing the date", date)
+        console.log("Printing the date from the component", date)
 
         return (  
             <Fragment>
                 <div className="flex justify-between space-x-2 border border-gray-1 rounded-[10px] bg-white p-3 bg-gray-900">
-                    <form action="" className="w-full p-1.5 pt-4">
+                    <form action="" className="w-full p-1.5 pt-4" onSubmit={this.onSubmit}>
 
                         <div className="mb-5">
                             <input type="text" id="amount" name="amount" onChange={this.onChange} className="text-3xl font-thin block w-full p-1.5 bg-gray-900 border border-r-0 border-l-0 border-t-0 border-b-1 border-gray-600 focus:outline-none text-gray-300" placeholder="¥" required  value={amount} />
@@ -102,7 +126,7 @@ export class Form extends React.Component {
 
                         <div className="flex justify-around">
                             <div className="flex flex-row">
-                                <button type="submit" onSubmit={this.onSubmit} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-900 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                                <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-900 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
                             </div>
                             <div className="flex flex-row">
                                 <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-900 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Clear</button>

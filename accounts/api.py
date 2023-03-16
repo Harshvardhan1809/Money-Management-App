@@ -6,6 +6,8 @@ from rest_framework.decorators import action, renderer_classes
 from rest_framework.renderers import BrowsableAPIRenderer, TemplateHTMLRenderer, JSONRenderer
 from django.core import serializers
 import json 
+from decimal import Decimal
+
 # Viewset
 # necessary to work with routers
 
@@ -79,7 +81,16 @@ class SpendingViewSet(viewsets.ModelViewSet):
         #return self.request.user.spendings.all()
 
     def perform_create(self, serializer): 
-        serializer.save(owner = self.request.user) 
+        # Get account from user and then expenditure from the account
+        req = self.request.data
+        print(req)
+        account = Account.objects.get(user = self.request.user)
+        expenditure = Expenditure.objects.get(account=account)
+        expenditure = expenditure
+        amount = Decimal(req['amount'].strip(' "'))
+        date = req['date'].replace("-", "")
+        formatted_date = datetime.date(int(date[0:4]), (10*int(date[4]) + int(date[5])), (10*int(date[6]) + int(date[7])))
+        serializer.save(amount=amount, type1=req['type1'], type2=req['type2'], date=formatted_date, note=req['memo'], expenditure=expenditure)
 
 
 class SpendingDataViewSet(viewsets.ModelViewSet): 

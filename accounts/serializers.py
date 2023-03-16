@@ -18,9 +18,11 @@ class SpendingSerializer(serializers.ModelSerializer):
 
     class Meta: 
         model = Spending
-        fields = '__all__'
+        fields = ('amount', 'type1', 'type2', 'date','note')
 
 class ExpenditureSerializer(serializers.ModelSerializer): 
+
+    # Not settings fields as '__all__' since expenditure type can't be sent through axios 
 
     class Meta: 
         model = Expenditure
@@ -46,4 +48,3 @@ class LoginSerializer(serializers.Serializer):
         if(user and user.is_active): 
             return user
         raise serializers.ValidationError("Incorrect Credentials")
-

@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react'
+import React, {Fragment, useState, useReducer} from 'react'
 import ReactDOM from 'react-dom'; 
 import {HashRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
 
@@ -8,8 +8,21 @@ import Form from './Form'
 import RecentAdditions from './RecentAdditions'
 import Footer from '../layout/Footer'
 
+// convert to functional component to class based component so that i can easily rerender it 
+
 export default function Home() {
-  return (
+
+    const [flag, setState] = useState(false); // integer state
+    const [ignored, useForceUpdate] = useReducer(x => x + 1, 0);
+
+    function handleFormSubmission(){
+        console.log("In handleSubmission");
+        // useForceUpdate(); 
+        console.log("In home doing rerendering")
+        return () => setState(flag => !flag); 
+    }
+
+    return (
         <Fragment>
 
             <div id="hero" className="flex-1 px-12 pt-1 pb-4 bg-slate-100 h-full w-full overflow-y-scroll">
@@ -54,7 +67,7 @@ export default function Home() {
                                     </div>
                                 </div>
 
-                                <Form />
+                                <Form func={handleFormSubmission} value={flag} />
 
                             </div>
 
@@ -74,7 +87,7 @@ export default function Home() {
                                         </div>
                                     </div>
 
-                                    <RecentAdditions />
+                                    <RecentAdditions key={flag}/>
 
                                 </div>
                             </div>
@@ -88,6 +101,6 @@ export default function Home() {
             </div>
 
         </Fragment>
-  )
+    )
 }
  
