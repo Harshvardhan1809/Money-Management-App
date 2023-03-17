@@ -36,7 +36,7 @@ export default function Home() {
                     </div>
                 </div>
 
-                <Carousel />            
+                <Carousel key={flag}/>            
 
                 <div className ="flex justify-between">
                     <div className="flex flex-col w-full">
@@ -52,7 +52,7 @@ export default function Home() {
                                     </div>
                                 </div>
 
-                                <Graph />
+                                <Graph key={flag}/>
 
                             </div>
 
@@ -67,7 +67,7 @@ export default function Home() {
                                     </div>
                                 </div>
 
-                                <Form func={handleFormSubmission} value={flag} />
+                                <Form func={handleFormSubmission} key={flag} />
 
                             </div>
 

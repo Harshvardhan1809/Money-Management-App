@@ -23,10 +23,13 @@ export class RecentAdditions extends Component {
     }
 
     componentDidMount(){
+        console.log("RecentAdditions mounted and printing")
         this.props.getRecentAdditions(); 
     }
 
     render(){
+
+    console.log("Render the RecentAdditions")
 
     return (
         <Fragment>

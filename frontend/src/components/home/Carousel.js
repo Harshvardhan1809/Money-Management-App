@@ -18,10 +18,13 @@ export class Carousel extends React.Component {
     // call the actions on mounting 
 
     componentDidMount(){
+        console.log("Carousel mounted and printing")
         this.props.getCarouselData(); 
     }
 
     render(){
+
+        console.log("Render the Carousel")
 
         return (
         <div className="carousel flex overflow-scroll flex-nowrap">
