@@ -13,7 +13,7 @@ import { spending_icon_class } from '../../../static/utilities/spending_icon'
 // FontAwesome icons 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-// When the component mounts, we call getLeads, the props get loaded into component as props from reducers
+// When the component mounts, we call getRecentAdditions, the props get loaded into component as props from reducers
 
 export class RecentAdditions extends Component {
 
@@ -28,8 +28,6 @@ export class RecentAdditions extends Component {
     }
 
     render(){
-
-    console.log("Render the RecentAdditions")
 
     return (
         <Fragment>

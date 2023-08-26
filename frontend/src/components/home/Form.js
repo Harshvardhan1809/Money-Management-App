@@ -3,7 +3,7 @@ import { eng_spending_choices } from '../../../static/utilities/eng_spending_cho
 import { eng_spending_type } from '../../../static/utilities/eng_spending_type';
 import { spending_type } from '../../../static/utilities/spending_type';
 import { postSpending, getRecentAdditions } from '../../actions/data';
-import {connect} from 'react-redux'
+import {connect, useStore} from 'react-redux'
 import PropTypes from 'prop-types'
 
 
@@ -24,59 +24,47 @@ export class Form extends React.Component {
         this.state = {
             amount: 0,
             type1:'shokuji',
-            type2:'',
+            type2:'食事',
             date: this.currentDate(),
             memo: ''
         }    
     }
 
     static propTypes = {
-        postSpending: PropTypes.func.isRequired
+        postSpending: PropTypes.func.isRequired, 
+        getRecentAdditions: PropTypes.func.isRequired
     }
 
     onChange = e => {
-        console.log("Target", e.target)
-        console.log("Target value", e.target.value)
-        console.log("Target name", e.target.name)
         this.setState({
             [e.target.name]: e.target.value
         })
-        console.log(this.state)
+        console.log(this.state); 
     }
 
     onSubmit = async (e) => {
         e.preventDefault(); 
         const {amount, type1, type2, date, memo} = this.state; 
+
         // try to make the axios call synchronous so that component updates after saving in db
         const a = await this.props.postSpending(amount, type1, type2, date, memo);  
-        // MAKE THE COMPONENT RELOAD SO THAT NEW DATA CAN BE FETCHED 
-        console.log("Now make the component rerender");
-        this.props.func(); 
+        // update the store so the new addition will displayed in the list upon rerender
+        this.props.getRecentAdditions(); 
 
-        // the below setState won't help because it doesn't rerender the Recent Additions
-        // component and the state won't get updated
-        // need to make the whole Home component rerender on submission
+        // the below setState rerenders the component
         this.setState({
             amount: 0,
             type1:'shokuji',
-            type2:'',
+            type2:'食事',
             date: this.currentDate(),
             memo: ''
         })
 
-        // First this function gets completely executed and then the action is carried out
-        console.log("Understand the flow of component")
     }
-
-    // AIM
-    // form submit -> action completes -> make recentAdditions (whole ) rerender -> 
-    // should have lifted state up to the Home component so that rerendering would be been easy
-    // or make synchronous API response, get data added and then rerender the components
 
     render(){
 
         const { amount, type1, type2, date, memo } = this.state; 
-        console.log("Printing the date from the component", date)
 
         return (  
             <Fragment>
@@ -144,4 +132,4 @@ const mapStateToProps = state => ({
     data : state.data
 })
 
-export default connect(mapStateToProps, {postSpending})(Form); 
+export default connect(mapStateToProps, {postSpending, getRecentAdditions})(Form); 

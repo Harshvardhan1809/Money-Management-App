@@ -186,16 +186,11 @@ export const postSpending = (amount, type1, type2, date, memo) => async (dispatc
     if (token) {
         config.headers['Authorization'] = `Token ${token}`;
     }
-    console.log(token)
-    // const body = JSON.stringify({amount, type1, type2, date, memo})
 
-    const expenditure = 1; 
     const body = JSON.stringify({amount, type1, type2, date, memo}); 
 
     await axios.post('/api/spending/', body, config)
     .then(res => {
-
-        console.log("IN THEN")
 
         dispatch({
             type: POST_SPENDING, 

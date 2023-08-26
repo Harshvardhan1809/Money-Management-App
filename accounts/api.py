@@ -132,16 +132,16 @@ class SpendingDataViewSet(viewsets.ModelViewSet):
             data = data.filter(date__month = today_month)
             # https://docs.djangoproject.com/en/4.1/topics/db/queries/#queryset-model-example
 
-
             # serializers.serialize only serializes qiuerysets to json 
             data = serializers.serialize("json",data)
 
 
         elif (slug == "recent_additions"):
             data = data.filter(expenditure=expenditure)
-            data = data.order_by('-date')[:10]
-
-                    # serializers.serialize only serializes qiuerysets to json 
+            data = data.order_by('-date').order_by('-id')
+            data = data[:10]
+        
+            # serializers.serialize only serializes qiuerysets to json 
             data = serializers.serialize("json",data)
 
         elif (slug == "overview_data"):

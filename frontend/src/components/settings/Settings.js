@@ -1,8 +1,25 @@
 import React, {Fragment, Component} from 'react'
 import Navbar from '../layout/Navbar'
 import Footer from '../layout/Footer'
+import { TermsAndConditions } from './options/TermsAndConditions';
+import { LightDarkMode } from './options/LightDarkMode';
+import { AboutUs } from './options/AboutUs';
+
 
 export class Settings extends Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            display : 'terms-conditions'
+        }
+    } 
+
+    handleClick = (e) => {
+        this.setState({
+            display : `${e.target.id}`
+        })
+    }
 
     render(){
 
@@ -25,17 +42,29 @@ export class Settings extends Component {
                                 <div id = "settings-card" className="p-4 pb-6 bg-white rounded-[10px] bg-white"> 
                                     <div id="settings-panel" className="">
                                         <div className="text-lg border border-t-0 border-l-0 border-r-0 border-b-2">
-                                            <a href="" id="terms-conditions-button">Terms &amp; Conditions</a>
+                                            <a href="" id="terms-conditions" onClick={this.handleClick}>Terms &amp; Conditions</a>
                                         </div>
                                         <div className="pt-2 pb-2 pl-8 text-lg border border-t-0 border-l-0 border-r-0 border-b-2">
-                                            <a href="" id="light-dark-button">Light/Dark Mode</a>
+                                            <a href="" id="light-dark" onClick={this.handleClick}>Light/Dark Mode</a>
                                         </div>
                                         <div className="pt-2 pb-2 pl-8 text-lg border border-t-0 border-l-0 border-r-0 border-b-2">
-                                            <a href="" id="about-us-button">About Us</a>
+                                            <a href="" id="about-us" onClick={this.handleClick}>About Us</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            {   () =>{
+                                    if(this.state['display'] == 'terms-conditions') {
+                                        return <TermsAndConditions />
+                                   }
+                                   else if(this.state['display'] == 'light-dark'){
+                                    return <LightDarkMode/>
+                                   }
+                                   else{
+                                    return <AboutUs />
+                                   }
+                                }
+                            }
                             <div className="w-8/12 p-4">
                                 <div id="terms-conditions-header" className="bg-white py-8 pr-4 pl-8 mb-2 rounded-[10px]">
                                     <p className="text-2xl">Terms and Conditions</p>

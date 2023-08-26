@@ -12,16 +12,6 @@ import Footer from '../layout/Footer'
 
 export default function Home() {
 
-    const [flag, setState] = useState(false); // integer state
-    const [ignored, useForceUpdate] = useReducer(x => x + 1, 0);
-
-    function handleFormSubmission(){
-        console.log("In handleSubmission");
-        // useForceUpdate(); 
-        console.log("In home doing rerendering")
-        return () => setState(flag => !flag); 
-    }
-
     return (
         <Fragment>
 
@@ -36,7 +26,7 @@ export default function Home() {
                     </div>
                 </div>
 
-                <Carousel key={flag}/>            
+                <Carousel/>            
 
                 <div className ="flex justify-between">
                     <div className="flex flex-col w-full">
@@ -52,7 +42,7 @@ export default function Home() {
                                     </div>
                                 </div>
 
-                                <Graph key={flag}/>
+                                <Graph/>
 
                             </div>
 
@@ -67,7 +57,7 @@ export default function Home() {
                                     </div>
                                 </div>
 
-                                <Form func={handleFormSubmission} key={flag} />
+                                <Form />
 
                             </div>
 
@@ -87,7 +77,7 @@ export default function Home() {
                                         </div>
                                     </div>
 
-                                    <RecentAdditions key={flag}/>
+                                    <RecentAdditions />
 
                                 </div>
                             </div>
