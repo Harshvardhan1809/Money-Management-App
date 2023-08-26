@@ -1,0 +1,37 @@
+{
+  "name": "money_management",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-dashboard": "tailwindcss -i ./dashboard.css -o ../css/dashboard.css",
+    "watch-dashboard": "tailwindcss -i ./dashboard.css -o ../css/dashboard.css --watch",
+    "build-signup": "tailwindcss -i ./signup.css -o ../css/signup.css",
+    "watch-signup": "tailwindcss -i ./signup.css -o ../css/signup.css --watch",
+    "build-login": "tailwindcss -i ./login.css -o ../css/login.css",
+    "watch-login": "tailwindcss -i ./login.css -o ../css/login.css --watch",
+    "build-settings": "tailwindcss -i ./settings.css -o ../css/settings.css",
+    "watch-settings": "tailwindcss -i ./settings.css -o ../css/settings.css --watch",
+    "build-account": "tailwindcss -i ./account.css -o ../css/account.css",
+    "watch-account": "tailwindcss -i ./account.css -o ../css/account.css --watch",    
+    "build-monthly-expenditure": "tailwindcss -i ./monthly-expenditure.css -o ../css/monthly-expenditure.css",
+    "watch-monthly-expenditure": "tailwindcss -i ./monthly-expenditure.css -o ../css/monthly-expenditure.css --watch",
+    "build-this-month": "tailwindcss -i ./this-month.css -o ../css/this-month.css",
+    "watch-this-month": "tailwindcss -i ./this-month.css -o ../css/this-month.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Harshvardhan1809/Money-Management-App.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Harshvardhan1809/Money-Management-App/issues"
+  },
+  "homepage": "https://github.com/Harshvardhan1809/Money-Management-App#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.2.1"
+  }
+}

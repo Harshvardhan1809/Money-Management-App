@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account</title>
+</head>
+<body>
+    <h4><a href="{% url "dashboard:home" %}">Back to Dashboard</a></h4>
+    <h2>
+        Account Details
+    </h2>
+    <h4>Profile Picture</h4>
+    <p>{}</p>
+    <h4>Logged in user</h4>
+    <p>{{users.email}}</p>
+    <h4>User Name</h4> 
+    <p>{{account.first_name}} {{account.last_name}}</p>
+    <h4>Date Joined</h4> 
+    <p>{{account.date_joined}}</p>
+    <h3>Logout</h3>
+    <form action="" method='POST'>
+        {% csrf_token %}
+        <button type='Submit' name='logout' value='logout'> Logout </button>
+    </form>
+    <a href="{% url 'accounts:account_update' slug=account.first_name %}">Update Account</a>
+       
+</body>
+</html>

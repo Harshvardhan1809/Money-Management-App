@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        body{
+            font-size: 17px;
+            font-family: arial;
+            background: #f4f4f4; 
+            line-height: 1.5em;
+        }
+        header{
+            background: #333; 
+            color: #fff; 
+            padding: 20px;
+            align: center;
+            border-bottom: 4px black solid; 
+            margin-bottom: 10px; 
+        }
+        #container{
+            width: 90%;
+            margin: auto; 
+            padding: 10px; 
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <h1>JQuery Crash Course</h1>
+    </header>
+    <div id="container">
+        <h3>Mouse Events</h3>
+        <input type="button" id="button1" value="Button 1">
+        <input type="button" id="button2" value="Button 2">
+        <p id="para1">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem porro atque quisquam fugiat maxime distinctio dolor eveniet. Dignissimos nobis natus sed, animi ex nisi, unde corrupti adipisci dolores expedita exercitationem officia ab. Tenetur quod voluptates praesentium ex in nisi odio a, ullam, nam iure vitae numquam unde voluptatem deleniti saepe ut! Iste, officiis. Sunt, at porro nisi nulla inventore repellendus corrupti cupiditate dolorem minima eaque, fuga blanditiis debitis aut illum, similique quas nemo aliquid exercitationem omnis laudantium id dicta incidunt. Veniam molestiae fuga laudantium omnis magnam quod enim ratione modi inventore quam et quo quidem architecto, non alias. Recusandae, facere!
+        </p>
+        <h1 id="coords"></h1>
+        <h1 id="h1name"></h1>
+        <form action="" id="form">
+            <label for="name">Name</label><br>
+            <input type="text" name="name" id="name"><br>
+            <label for="gender">Gender</label><br>
+            <select name="gender" id="gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <script>
+        $(document).ready(function(){
+            $('#button1').on('click', function(e){
+                $('#para1').toggle(); 
+                console.log(e.currentTarget.id); 
+            })
+            $('#button2').on('click', function(e){
+                $('#coords').html("X-Coord = " + e.clientX + ", Y-Coord = " + e.clientY); 
+            })
+            $(document).on('mousemove', function(e){
+                $('#coords').html("X-Coord = " + e.clientX + ", Y-Coord = " + e.clientY); 
+            })
+            $('#gender').change(function(){
+                alert("Changed"); 
+            })
+            $('#form').submit(function(e){
+                e.preventDefault(); 
+                var name = $("#name").val(); 
+                $('#h1name').html(name); 
+            })
+        })
+    </script>
+</body>
+</html>
